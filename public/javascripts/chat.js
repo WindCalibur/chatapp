@@ -1,7 +1,8 @@
 window.onload = function() {
  
     var messages = [];
-    var socket = io.connect('http://localhost:3000');
+    //var socket = io.connect('http://localhost:3000');
+    var socket = io.connect('http://ec2-54-186-153-99.us-west-2.compute.amazonaws.com:3000/');
     var field = document.getElementById("field");
     var sendButton = document.getElementById("send");
     var content = document.getElementById("content");
