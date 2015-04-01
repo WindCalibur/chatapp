@@ -1,8 +1,17 @@
 body {
+  background-image: url(/images/simple-blue-opera-background-light-49001.jpg);
+
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
+}
+
+input {
+	border:2px solid #456879;
+	border-radius:10px;
+	height: 22px;
+	width: 230px;
 }
