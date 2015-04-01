@@ -7,6 +7,9 @@
 var app = require('../app');
 var debug = require('debug')('chatapp:server');
 var http = require('http');
+var database = require('../routes/database');
+var User_Message = require('../routes/User_Message');
+
 
 /**
  * Get port from environment and store in Express.
@@ -27,9 +30,21 @@ var server = http.createServer(app);
 
 var io = require('socket.io').listen(server.listen(port));
 io.sockets.on('connection', function (socket) {
-    socket.emit('message', { message: 'welcome to the chat' });
+    User_Message.find({}, function(err, msgs) {
+    if (err) throw err;
+    // object of all the users
+        msgs.forEach(function(entry) {
+          socket.emit('message', {username: entry.username, message: entry.message});
+          //messages.push({username: entry.username, message: entry.message});
+          //console.log(entry.message);
+          //console.log(entry.username);
+          //console.log(messages);
+        });
+    });
+    
     socket.on('send', function (data) {
         io.sockets.emit('message', data);
+        database.inputMessage(data);
     });
 });
 
